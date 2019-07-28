@@ -15,22 +15,39 @@ snippet preq1
 # $GLOBALS['...']
 snippet pglobals
 	$GLOBALS['${1:variable}']${2: = }${3:'something'}${4:;}${5}
-snippet $_ COOKIE['...']
-	$_COOKIE['${1:variable}']${2}
-snippet $_ ENV['...']
-	$_ENV['${1:variable}']${2}
-snippet $_ FILES['...']
-	$_FILES['${1:variable}']${2}
-snippet $_ Get['...']
-	$_GET['${1:variable}']${2}
-snippet $_ POST['...']
-	$_POST['${1:variable}']${2}
-snippet $_ REQUEST['...']
-	$_REQUEST['${1:variable}']${2}
-snippet $_ SERVER['...']
-	$_SERVER['${1:variable}']${2}
-snippet $_ SESSION['...']
-	$_SESSION['${1:variable}']${2}
+snippet pcookie 
+	$_COOKIE['${1:variable}']${2:;}${3}
+snippet pcookie= 
+	$_COOKIE['${1:variable}']${2: = }${3:''}${4:;}${5}
+snippet penv 
+	$_ENV['${1:variable}']${2:;}${3}
+snippet penv= 
+	$_ENV['${1:variable}']${2: = }${3:''}${4:;}${5}
+snippet pfiles 
+	$_FILES['${1:variable}']${2:;}${3}
+snippet pfiles= 
+	$_FILES['${1:variable}']${2: = }${3:''}${4:;}${5}
+snippet pget 
+	$_GET['${1:variable}']${2:;}${3}
+snippet pget= 
+	$_GET['${1:variable}']${2: = }${3:''}${4:;}${5}
+snippet ppost 
+	$_POST['${1:variable}']${2:;}${3}
+snippet ppost= 
+	$_POST['${1:variable}']${2: = }${3:''}${4:;}${5}
+snippet preq 
+	$_REQUEST['${1:variable}']${2:;}${3}
+snippet preq= 
+	$_REQUEST['${1:variable}']${2: = }${3:''}${4:;}${5}
+snippet pser 
+	$_SERVER['${1:variable}']${2:;}${3}
+snippet pser= 
+	$_SERVER['${1:variable}']${2: = }${3:''}${4:;}${5}
+snippet psess 
+	$_SESSION['${1:variable}']${2:;}${3}
+snippet psess= 
+	$_SESSION['${1:variable}']${2: = }${3:''}${4:;}${5}
+
 # Start Docblock
 snippet /*
 	/**
@@ -135,11 +152,13 @@ snippet doc_i
 	{${5}
 		${6}
 	}
+snippet pinter 
+	interface ${1:interfaceName}
+	{${5}
+		${6}
+	}
 # class ...
 snippet pclass
-	/**
-	 * ${1}
-	 **/
 	class ${2:ClassName}
 	{
 		${3}
@@ -153,9 +172,9 @@ snippet pdef
 	define('${1}'${2});${3}
 # defined(...)
 snippet pdef?
-	${1}defined('${2}')${3} or define('${4}', '${5}')
+	${1}defined('${2}')${3} or define('${4}', '${5}');${6}
 snippet pwh
-	while (${1:/* condition */}) {
+	while (${1}) {
 		${2:// code...}
 	}
 # do ... while
@@ -168,7 +187,7 @@ snippet pif
 		${2:// code...}
 	}
 snippet pife
-	if (${1:/* condition */}) {
+	if (${1}) {
 		${2:// code...}
 	} else {
 		${3:// code...}
@@ -179,13 +198,13 @@ snippet pelse
 		${1:// code...}
 	}
 snippet pelseif
-	elseif (${1:/* condition */}) {
+	elseif (${1}) {
 		${2:// code...}
 	}
 # Tertiary conditional
 snippet pt
-	$${1:retVal} = (${2:condition}) ? ${3:a} : ${4:b};${5}
-snippet switch
+	$${1:retVal} = ${2:condition} ? ${3:a} : ${4:b};${5}
+snippet pswitch
 	switch ($${1:variable}) {
 		case '${2:value}':
 			${3:// code...}
@@ -199,11 +218,11 @@ snippet pcase
 	case '${1:value}':
 		${2:// code...}
 		break;${3}
-snippet for
+snippet pfor
 	for ($${2:i} = 0; $$2 < ${1:count}; $$2${3:++}) {
 		${4: // code...}
 	}
-snippet foreach
+snippet pforeach
 	foreach ($${1:key} as $${2:value}) {
 		${3:// code...}
 	}
@@ -257,3 +276,6 @@ snippet ptry
 		echo $e->getMessage();
 	}
 
+snippet peof
+	echo <<<EOF
+	EOF;
