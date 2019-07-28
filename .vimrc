@@ -499,7 +499,7 @@ set statusline=%F%m%r\ ASCII=\%b,HEX=\%B,%l,%c%V\ %L-%p%%
 "语言环境
 """"""""""""""""""""""""""""
 set encoding=utf-8
-langua message zh_CN.UTF-8
+"langua message zh_CN.UTF-8
 set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,gb2312
 "设置字符编码列表
 "set guifontwide=微软雅黑:h14 "设置中文的字体
@@ -688,32 +688,41 @@ nnoremap <F10> :UndotreeToggle<cr>
 "-----------------------------------------------------------------
 "
 "" plugin - cscope设置
+"find . -name '*.php' cscope.out
 "像ctags一样，需要提前生成cscope.out文件。cscope -Rbq, 然后在执行:cs add cscope.out
 "-----------------------------------------------------------------
 "
-set cscopequickfix=s-,c-,d-,i-,t-,e-  
+"set cscopequickfix=s-,c-,d-,i-,t-,e- 
 if has("cscope")  
-    set csprg=/usr/bin/cscope  
-    set csto=1  
-    set cst  
+    set csprg=/usr/bin/cscope "指定了执行cscpoe的命令 
+    set csto=1 "假如’csto’被设置为0，那么cscope数据将会被优先查找，假如cscope没有返回匹配项，然后才会查找tag文件。反之，则查找顺序相反。默认值是0 
+    set cst "同时查找cscope数据库和tags文件 
     set nocsverb  
 
     " add any database in current directory"
-    "if filereadable("cscope.out")
-    "    cs add cscope.out
-    "endif
-    "set csverb
+    if filereadable("/webser/www/timingyiinew/cscope.out")
+        cs add /webser/www/timingyiinew/cscope.out
+    endif
+    set csverb "没有被设置（默认情况是如此），那么当在增加一个cscope数据库时不会显示表示表示执行成功或失败的信息
 endif
 
-nmap <C-s> :cs find s <C-R>=expand("<cword>")<CR><CR>
+"s/0查找这个C符号
 nmap <C-g> :cs find g <C-R>=expand("<cword>")<CR><CR>
+"c/3查找调用这个函数的函数（们）
 nmap <C-c> :cs find c <C-R>=expand("<cword>")<CR><CR>
+"4或者t 查找这个字符串
 nmap <C-t> :cs find t <C-R>=expand("<cword>")<CR><CR>
+" 6或者e  —— 查找这个egrep匹配模式
 nmap <C-e> :cs find e <C-R>=expand("<cword>")<CR><CR>
+"7或者f   —— 查找这个文件
 nmap <C-f> :cs find f <C-R>=expand("<cfile>")<CR><CR>
+"8或者i   —— 查找#include这个文件的文件（们）
 nmap <C-i> :cs find i <C-R>=expand("<cfile>")<CR><CR>
+" 2或者d  —— 查找被这个函数调用的函数（们）
 nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR>
 
+"map g<C-]> :cs find 3 <C-R>=expand(“<cword>”)<CR><CR>
+"map g<C-/> :cs find 0 <C-R>=expand(“<cword>”)<CR><CR>
 
 
 "打开vim 自动加载最后编辑的文件 ctrl+y  或者多次ctrl+o
@@ -798,3 +807,4 @@ let g:NERDToggleCheckAllLines = 1
 
 set tags+=~/.vim/systags
 set tags+=/webser/www/tags
+set tags+=/webser/www/timingyiinew
