@@ -807,7 +807,7 @@ let g:NERDToggleCheckAllLines = 1
 
 "fugitive.vim
 "使用do dp 处理修改
-nnoremap <silent> <C-v> :Gvdiff<CR>
+nnoremap <silent> <C-k> :Gvdiff<CR>
 nnoremap <silent> <C-l> :Gblame<CR>
 
 
