@@ -489,7 +489,7 @@ let g:airline_statusline_ontop = 1
 "set laststatus=2                "显示状态栏(默认值为1，无法显示状态栏)
 ""windows:  set statusline=%F%m%r,%Y,%{&fileformat}\\\ASCII=\%b,HEX=\%B\\\ %l,%c%V\ %p%%\\\[\%L\ lines\ in\ all\]
 "set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
-set statusline=%F%m%r\ ASCII=\%b,HEX=\%B,%l,%c%V\ %L-%p%%
+set statusline=%F%m%r\ %{FugitiveStatusline()}\ ASCII=\%b,HEX=\%B,%l,%c%V\ %L-%p%%
 "set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 "
 "vim-git-log
@@ -804,6 +804,7 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 "常用快捷键使用help nerdcommenter
 " \cc  \cn \cu
+
 
 set tags+=~/.vim/systags
 set tags+=/webser/www/tags
