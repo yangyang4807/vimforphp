@@ -805,6 +805,12 @@ let g:NERDToggleCheckAllLines = 1
 "常用快捷键使用help nerdcommenter
 " \cc  \cn \cu
 
+"fugitive.vim
+"使用do dp 处理修改
+nnoremap <silent> <C-v> :Gvdiff<CR>
+nnoremap <silent> <C-l> :Gblame<CR>
+
+
 
 set tags+=~/.vim/systags
 set tags+=/webser/www/tags
