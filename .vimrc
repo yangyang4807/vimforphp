@@ -707,11 +707,13 @@ if has("cscope")
 endif
 
 "s/0查找这个C符号
-nmap <C-g> :cs find g <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-s> :cs find s <C-R>=expand("<cword>")<CR><CR>
+"g/1查找这个定义
+"nmap <C-g> :cs find g <C-R>=expand("<cword>")<CR><CR>
 "c/3查找调用这个函数的函数（们）
-nmap <C-c> :cs find c <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-c> :cs find c <C-R>=expand("<cword>")<CR><CR>
 "4或者t 查找这个字符串
-nmap <C-t> :cs find t <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-t> :cs find t <C-R>=expand("<cword>")<CR><CR>
 " 6或者e  —— 查找这个egrep匹配模式
 nmap <C-e> :cs find e <C-R>=expand("<cword>")<CR><CR>
 "7或者f   —— 查找这个文件
@@ -719,10 +721,11 @@ nmap <C-f> :cs find f <C-R>=expand("<cfile>")<CR><CR>
 "8或者i   —— 查找#include这个文件的文件（们）
 nmap <C-i> :cs find i <C-R>=expand("<cfile>")<CR><CR>
 " 2或者d  —— 查找被这个函数调用的函数（们）
-nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-"map g<C-]> :cs find 3 <C-R>=expand(“<cword>”)<CR><CR>
-"map g<C-/> :cs find 0 <C-R>=expand(“<cword>”)<CR><CR>
+map <C-]> :cs find 1 <C-R>=expand("<cword>")<CR><CR>
+map <C-\> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+map <C-T> <C-O>
 
 
 "打开vim 自动加载最后编辑的文件 ctrl+y  或者多次ctrl+o
@@ -759,7 +762,7 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 "关闭加载.ycm_extra_conf.py提示
 let g:ycm_confirm_extra_conf=1 
 let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
-let g:ycm_min_num_of_chars_for_completion=2 "从第2个键入字符就开始罗列匹配项
+let g:ycm_min_num_of_chars_for_completion=3 "从第2个键入字符就开始罗列匹配项
 let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
 let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
 "nnoremap <F11> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
@@ -810,6 +813,8 @@ let g:NERDToggleCheckAllLines = 1
 nnoremap <silent> <C-k> :Gvdiff<CR>
 nnoremap <silent> <C-l> :Gblame<CR>
 
+"vim-multiple-cursors
+"使用方法 使用ctrl+n选中多列，s 查找并替换，输入替换字符，按esc即可
 
 
 set tags+=~/.vim/systags
