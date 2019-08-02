@@ -427,7 +427,7 @@ nnoremap <silent> <F3> :Rgrep<CR>
 "let MRU_File=$HOME.'/.vim/config/_vim_mru_files'  "把记录保存在哪
 ""let MRU_Max_Entries=10                          "最多保存多少条记录
 "let MRU_Window_Height=8                         "设置MRU窗口高度
-""let MRU_Use_Current_Window=0                     "设置是否让MRU窗口独点一页
+let MRU_Use_Current_Window=0                     "设置是否让MRU窗口独点一页, 设置为1的话在当前窗口打开  mru list
 "映射F2打开和关闭MRU窗口，bufloaded是判断缓冲是否加载
 "map <expr> <F2> bufloaded("__MRU_Files__")?"q":":CtrlPMRU\<cr>"
 map <expr> <F2> bufloaded("__MRU_Files__")?"q":":MRU\<cr>"
@@ -721,10 +721,11 @@ nmap <C-f> :cs find f <C-R>=expand("<cfile>")<CR><CR>
 "8或者i   —— 查找#include这个文件的文件（们）
 nmap <C-i> :cs find i <C-R>=expand("<cfile>")<CR><CR>
 " 2或者d  —— 查找被这个函数调用的函数（们）
-"nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR>
+"c-d 冲突了
+nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-map <C-]> :cs find 1 <C-R>=expand("<cword>")<CR><CR>
-map <C-\> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+nmap <C-]> :cs find 1 <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
 map <C-T> <C-O>
 
 
@@ -815,7 +816,6 @@ nnoremap <silent> <C-l> :Gblame<CR>
 
 "vim-multiple-cursors
 "使用方法 使用ctrl+n选中多列，s 查找并替换，输入替换字符，按esc即可
-
 
 set tags+=~/.vim/systags
 set tags+=/webser/www/tags
