@@ -688,8 +688,8 @@ nnoremap <F10> :UndotreeToggle<cr>
 "-----------------------------------------------------------------
 "
 "" plugin - cscope设置
-"find . -name '*.php' cscope.out
-"像ctags一样，需要提前生成cscope.out文件。cscope -Rbq, 然后在执行:cs add cscope.out
+"find . -name '*.php'> cscope.files
+"像ctags一样，需要提前生成cscope.out文件。cscope -Rbq -i cscope.files, 然后在执行:cs add cscope.out
 "-----------------------------------------------------------------
 "
 "set cscopequickfix=s-,c-,d-,i-,t-,e- 
