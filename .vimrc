@@ -820,3 +820,7 @@ nnoremap <silent> <C-l> :Gblame<CR>
 set tags+=~/.vim/systags
 set tags+=/webser/www/tags
 set tags+=/webser/www/timingyiinew
+
+
+"粘贴内容时不自动缩进
+set pastetoggle=<F11> 
