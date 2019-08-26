@@ -271,8 +271,6 @@ Plug 'vim-scripts/grep.vim'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 ""快速注释
 Plug 'scrooloose/nerdcommenter'
-"快速注释
-"Plug 'tpope/vim-commentary'
 
 ""用细竖线显示缩进级别
 Plug 'Yggdroot/indentLine'
@@ -297,17 +295,17 @@ Plug 'vim-scripts/synmark.vim'
 Plug 'vim-syntastic/syntastic'
 
 "airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 
 "对齐插件, 同类插件tabular，大家都比较推荐vim-easy-align
 Plug 'junegunn/vim-easy-align'
 "以可视化方式选择更大区域
 "Plug 'terryma/vim-expand-region'
 "多选项
-Plug 'terryma/vim-multiple-cursors'
+"Plug 'terryma/vim-multiple-cursors'
 "快速滑动
-Plug 'terryma/vim-smooth-scroll'
+"Plug 'terryma/vim-smooth-scroll'
 
 "zendcoding, surround对css,html补全友好
 "Plug 'vim-scripts/ZenCoding.vim'
@@ -329,13 +327,11 @@ Plug 'lvht/phpcd.vim'
 Plug 'benmatselby/sublime-phpcs'
 ""vdebug,用于Vim的多语言DBGP调试器客户端（PHP，Python，Perl，Ruby等）
 "Plug 'vim-vdebug/vdebug'
-""官方php库
-"Plug 'vimeo/vimeo.php'
 
 
 ""python自动补全
 Plug 'rkulla/pydiction.vim'
-Plug 'humiaozuzu/dot-vimrc'
+"Plug 'humiaozuzu/dot-vimrc'
 "python的vim
 Plug 'prompt-toolkit/pyvim'
 Plug 'Crapworks/python_fn.vim'
@@ -369,7 +365,7 @@ Plug 'kablamo/vim-git-log'
 "自动加载和错误解析
 Plug 'tpope/vim-dispatch'
 "源码列表，方法和函数列表
-Plug 'vim-scripts/taglist.vim'
+"Plug 'vim-scripts/taglist.vim'
 "tagbar是一个taglist的替代品，比taglist更适合c++使用，函数能够按类区分，支持按类折叠显示等，显示结果清晰简洁，强烈推荐
 Plug 'majutsushi/tagbar'
 
@@ -611,7 +607,9 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
 "  python pylint
 let g:syntastic_python_checkers=['pylint']
+"let g:syntastic_python_checkers=[]
 "php
+"let g:syntastic_php_checkers=['php']
 let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -821,6 +819,7 @@ set tags+=~/.vim/systags
 set tags+=/webser/www/tags
 set tags+=/webser/www/timingyiinew
 
-
 "粘贴内容时不自动缩进
 set pastetoggle=<F11> 
+"set vbs=4
+
