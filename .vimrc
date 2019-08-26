@@ -311,17 +311,18 @@ Plug 'junegunn/vim-easy-align'
 "Plug 'vim-scripts/ZenCoding.vim'
 Plug 'tpope/vim-surround'
 
+"第二次改动，youcompleteme 是在时太慢了，果断关掉,世界都变美好了
 "youcompleteme在phpcomplete和phpcd的基础上，原本要使用ctrl+x
 "ctrl+o才能只能补全的，现在一边敲代码一边就能补全了
 "YouCompleteMedu的关键词补全
 "使用的是自己的那一套，比如array_slice就只提示array_slice，不提示函数参数这些等，所以不想用他自身的
-Plug 'Valloric/YouCompleteMe'
+"Plug 'Valloric/YouCompleteMe'
 "php的自动补全 phpcd也是代码补全，更快，更高效
 Plug 'shawncplus/phpcomplete.vim'
 Plug 'lvht/phpcd.vim'
 "编辑过的变量和函数自动弹出, 自定义的
 "由于youcompleteme已经包含了autocompPop,所以开启了youcompleteme就不需要在使用autocomplPop
-"Plug 'vim-scripts/AutoComplPop'
+Plug 'vim-scripts/AutoComplPop'
 "
 ""PHP CodeSniffer、PHP编码标准修复程序、Linter和Mess检测器支持卓越的文本, 暂时先不用
 Plug 'benmatselby/sublime-phpcs'
@@ -331,7 +332,7 @@ Plug 'benmatselby/sublime-phpcs'
 
 ""python自动补全
 Plug 'rkulla/pydiction.vim'
-"Plug 'humiaozuzu/dot-vimrc'
+Plug 'humiaozuzu/dot-vimrc'
 "python的vim
 Plug 'prompt-toolkit/pyvim'
 Plug 'Crapworks/python_fn.vim'
@@ -506,7 +507,7 @@ set termencoding=utf-8
 """"""""""""""""""""""""""""
 "映射,F4执行ctags命令
 """"""""""""""""""""""""""""
-map <F4> :!/usr/bin/ctags -f /webser/www/tags -R --languages=php --fields=+iaS --extra=+q<cr>
+"map <F4> :!/usr/bin/ctags -f /webser/www/tags -R --languages=php --fields=+iaS --extra=+q<cr>
 
 
 "获取当前文件名
@@ -600,14 +601,18 @@ nmap \db :DoxBlock<CR><ESC>k8==
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*let 
+"打开文件时高亮显示错误
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1 "打开报错窗口
+"打开报错窗口
+let g:syntastic_auto_loc_list = 1 
+"打开文件时自动进行检查
 let g:syntastic_check_on_open = 1
+"进行实时检查，如果觉得卡顿，将下面的选项置为1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
 "  python pylint
 let g:syntastic_python_checkers=['pylint']
-"let g:syntastic_python_checkers=[]
+"let g:syntastic_python_checkers=['python']
 "php
 "let g:syntastic_php_checkers=['php']
 let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
@@ -698,9 +703,9 @@ if has("cscope")
     set nocsverb  
 
     " add any database in current directory"
-    if filereadable("/webser/www/timingyiinew/cscope.out")
-        cs add /webser/www/timingyiinew/cscope.out
-    endif
+    "if filereadable("/webser/www/timingyiinew/cscope.out")
+    "    cs add /webser/www/timingyiinew/cscope.out
+    "endif
     set csverb "没有被设置（默认情况是如此），那么当在增加一个cscope数据库时不会显示表示表示执行成功或失败的信息
 endif
 
@@ -736,6 +741,7 @@ map <C-T> <C-O>
 "map <c-o>
 
 
+inoremap <leader><leader> <C-x><C-o>
 
 
 """""""""""""""""""""""""""
@@ -767,7 +773,6 @@ let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
 "nnoremap <F11> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
 "nnoremap <leader>lo :lopen<CR> "open locationlist
 "nnoremap <leader>lc :lclose<CR>    "close locationlist
-inoremap <leader><leader> <C-x><C-o>
 "
 " "在注释输入中也能补全
 let g:ycm_complete_in_comments = 1
