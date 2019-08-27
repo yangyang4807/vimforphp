@@ -265,7 +265,8 @@ Plug 'vim-scripts/Auto-Pairs'
 "Plug 'ctrlp-modified.vim'
 "Plug 'ctrlp.vim'
 ""grep模糊搜索比较快
-Plug 'vim-scripts/grep.vim'
+"cscope 已经包含了grep功能，如果关闭cscope， 需要打开，并设置F3快捷键
+"Plug 'vim-scripts/grep.vim'
 
 "注释
 Plug 'vim-scripts/DoxygenToolkit.vim'
@@ -413,7 +414,8 @@ let g:ctrlp_extensions = ['funky']
 "Grep
 """""""""""""""""""""""""""""
 "vim-script/grep
-nnoremap <silent> <F3> :Rgrep<CR>
+""如果不使用cscope 就开启Rgrep
+"nnoremap <silent> <F3> :Rgrep<CR>
 "grepper
 "nnoremap <silent> <F3> :Grepper<CR>
 
@@ -439,7 +441,7 @@ let NERDChristmasTree=1            "让Tree把自己给装饰得多姿多彩些
 "let NERDTreeAutoCenter=1 "控制光标移动超过一定距离时，是否自动将焦点y调整到屏中心
 "let NERDTreeAutoCenterThreshold=1  "与上面配合使用
 "let NERDTreeCaseSensitiveSort=1    "排序时是否大小写敏感
-"let NERDTreeHighlightCursorline=1  "是否高亮显示光标所在行
+let NERDTreeHighlightCursorline=1  "是否高亮显示光标所在行
 "let NERDTreeBookmarksFile='/root/vim/bookmark.txt'  "指写书签文件
 let NERDTreeMouseMode=2 "指定鼠标模式：1为双击打开，3为单击打开，2为目录为单击打开，文件双击打开
 let NERDTreeShowBookmarks=1        "是否默认显示书签列表
@@ -715,7 +717,14 @@ nnoremap <F10> :UndotreeToggle<cr>
 "像ctags一样，需要提前生成cscope.out文件。cscope -Rbq -i cscope.files, 然后在执行:cs add cscope.out
 "-----------------------------------------------------------------
 "
+"设置cscope的列表color
+""参考：https://github.com/jonathanfilip/vim-lucius/issues/3"
+"hi ModeMsg ctermfg=Green  #可以颜色主题的vim文件中设置
+
+" cscope 结果输出到 quickfix窗口
 "set cscopequickfix=s-,c-,d-,i-,t-,e- 
+"nmap <C-n> :cnext<CR>
+"nmap <C-p> :cprev<CR>
 if has("cscope")  
     set csprg=/usr/bin/cscope "指定了执行cscpoe的命令 
     set csto=1 "假如’csto’被设置为0，那么cscope数据将会被优先查找，假如cscope没有返回匹配项，然后才会查找tag文件。反之，则查找顺序相反。默认值是0 
