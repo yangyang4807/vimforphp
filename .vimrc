@@ -507,8 +507,28 @@ set termencoding=utf-8
 """"""""""""""""""""""""""""
 "映射,F4执行ctags命令
 """"""""""""""""""""""""""""
-"map <F4> :!/usr/bin/ctags -f /webser/www/tags -R --languages=php --fields=+iaS --extra=+q<cr>
+"map <F4> :!/usr/bin/ctags -f tags -R --languages=php --fields=+iaS --extra=+q<cr>
+map <F4> :call AutoUpdateCscopeAndTags()<cr> 
 
+function AutoUpdateCscopeAndTags() 
+    call AutoUpdateTags()
+    call AutoCreateCscopeFiles()
+    call AutoUpdateCscopeOut()
+    call AutoResetCscopeOut()
+endfunction
+
+function AutoUpdateTags()
+    !/usr/bin/ctags -f tags -R --languages=php --fields=+iaS --extra=+q 
+endfunction
+function AutoCreateCscopeFiles()
+    !find  $PWD -name '*.php'> cscope.files
+endfunction
+function AutoUpdateCscopeOut()
+    !cscope -Rbq -i cscope.files
+endfunction
+function AutoResetCscopeOut()
+    cs reset 
+endfunction
 
 "获取当前文件名
 function GetFileName()
@@ -701,6 +721,17 @@ if has("cscope")
     set csto=1 "假如’csto’被设置为0，那么cscope数据将会被优先查找，假如cscope没有返回匹配项，然后才会查找tag文件。反之，则查找顺序相反。默认值是0 
     set cst "同时查找cscope数据库和tags文件 
     set nocsverb  
+
+	if filereadable("cscope.out")  
+        cs add cscope.out  
+    "else search cscope.out elsewhere  
+    else 
+        let cscope_file=findfile("cscope.out",".;")  
+        let cscope_pre=matchstr(cscope_file,".*/")  
+        if !empty(cscope_file) && filereadable(cscope_file)  
+            exe "cs add" cscope_file cscope_pre  
+        endif        
+    endif  
 
     " add any database in current directory"
     "if filereadable("/webser/www/timingyiinew/cscope.out")

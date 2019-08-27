@@ -19,7 +19,7 @@ hi Directory	  term=bold  cterm=bold  ctermfg=brown  guifg=#cc8000
 hi ErrorMsg		  term=standout  cterm=bold  ctermfg=grey  ctermbg=red  guifg=White  guibg=Red
 hi Search		  term=reverse  ctermfg=white  ctermbg=red      guifg=white  guibg=#FFFFFF
 hi MoreMsg		  term=bold  cterm=bold  ctermfg=darkgreen	gui=bold  guifg=SeaGreen
-hi ModeMsg		  term=bold  cterm=bold  gui=bold  guifg=White	guibg=Blue
+hi ModeMsg		  term=bold  cterm=bold  gui=bold  guifg=White	guibg=Blue ctermfg=brown
 hi LineNr		  term=underline  cterm=bold  ctermfg=darkcyan	guifg=#BD871D
 hi Question		  term=standout  cterm=bold  ctermfg=darkgreen	gui=bold  guifg=Green
 hi StatusLine	  term=bold,reverse  cterm=bold ctermfg=lightblue ctermbg=white gui=bold guifg=blue guibg=white
