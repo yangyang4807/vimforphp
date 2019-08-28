@@ -352,17 +352,17 @@ Plug 'Crapworks/python_fn.vim'
 Plug 'fsouza/pythoncomplete.vim'
 
 "django, python web框架
-Plugin 'vim-scirpts/django_templates.vim'
-Plugin 'pydanny/cookiecutter-django'
+Plug 'vim-scirpts/django_templates.vim'
+Plug 'pydanny/cookiecutter-django'
 
 "java
 Plug 'artur-shaik/vim-javacomplete2'
 
 "js
 "js格式化
-Plugin 'maksimr/vim-jsbeautify'
+Plug 'maksimr/vim-jsbeautify'
 "在Vim中 大大改进了Javascript缩进和语法支持
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
 "Plug 'andrewfiorillo/sketch-palettes'
 
