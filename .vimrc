@@ -304,7 +304,7 @@ Plug 'junegunn/vim-easy-align'
 "以可视化方式选择更大区域
 "Plug 'terryma/vim-expand-region'
 "多选项
-"Plug 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 "快速滑动
 "Plug 'terryma/vim-smooth-scroll'
 
@@ -312,15 +312,23 @@ Plug 'junegunn/vim-easy-align'
 "Plug 'vim-scripts/ZenCoding.vim'
 Plug 'tpope/vim-surround'
 
+"自动补全有四类
+"1）已经使用过的关键词（包括自定义的关键词） AutoComplPop
+"2)系统函数补全 dict字典也行，complete也行
+"3）代码块补全 snipMate
+"4)自定义的函数和方法提示  phpcomplete
+"
+"另外要注意phpcomplete是在Omni completion基础上完成的，使用<c-x><c-o>补全,
+"是以tags 文件为基础的, 要注意只能在本项目中, 否则会很慢，很卡，并且没有提示
+
 "第二次改动，youcompleteme 是在时太慢了，果断关掉,世界都变美好了
-"youcompleteme在phpcomplete和phpcd的基础上，原本要使用ctrl+x
-"ctrl+o才能只能补全的，现在一边敲代码一边就能补全了
-"YouCompleteMedu的关键词补全
-"使用的是自己的那一套，比如array_slice就只提示array_slice，不提示函数参数这些等，所以不想用他自身的
+"youcompleteme在phpcomplete和phpcd的基础上，原本要使用ctrl+x ctrl+o才能只能补全的，现在一边敲代码一边就能补全了
+"YouCompleteMedu的关键词补全 "使用的是自己的那一套，比如array_slice就只提示array_slice，不提示函数参数这些等，所以不想用他自身的
 "Plug 'Valloric/YouCompleteMe'
 "php的自动补全 phpcd也是代码补全，更快，更高效
 Plug 'shawncplus/phpcomplete.vim'
-Plug 'lvht/phpcd.vim'
+"开启了phpcd.vim 导致了不能自动提醒类和方法，没有找到原因，先关闭
+"Plug 'lvht/phpcd.vim'
 "编辑过的变量和函数自动弹出, 自定义的
 "由于youcompleteme已经包含了autocompPop,所以开启了youcompleteme就不需要在使用autocomplPop
 Plug 'vim-scripts/AutoComplPop'
@@ -332,13 +340,30 @@ Plug 'benmatselby/sublime-phpcs'
 
 
 ""python自动补全
-Plug 'rkulla/pydiction.vim'
-Plug 'humiaozuzu/dot-vimrc'
+"Pydiction允许您在Vim中使用Tab-complete
+"Python代码，例如关键字，内置函数，标准库和第三方模块
+Plug 'vim-scripts/Pydiction'
+"代码完成，代码提示
+"Plug 'humiaozuzu/dot-vimrc'
 "python的vim
-Plug 'prompt-toolkit/pyvim'
+"Plug 'prompt-toolkit/pyvim'
+"跳转和移动
 Plug 'Crapworks/python_fn.vim'
 Plug 'fsouza/pythoncomplete.vim'
-"
+
+"django, python web框架
+Plugin 'vim-scirpts/django_templates.vim'
+Plugin 'pydanny/cookiecutter-django'
+
+"java
+Plug 'artur-shaik/vim-javacomplete2'
+
+"js
+"js格式化
+Plugin 'maksimr/vim-jsbeautify'
+"在Vim中 大大改进了Javascript缩进和语法支持
+Plugin 'pangloss/vim-javascript'
+
 "Plug 'andrewfiorillo/sketch-palettes'
 
 "提升速度
@@ -381,7 +406,7 @@ Plug 'godoctor/godoctor.vim'
 Plug 'fatih/vim-go'
 "所有插入都转换成tab
 "youcompleteme包含了supertab这个功能，所以如果打开了youcompleteme就可以不适用supertab.vim了
-"Plug 'wenshuai-xi/supertab.vim'
+Plug 'wenshuai-xi/supertab.vim'
 
 
 "中文文档
@@ -389,6 +414,9 @@ Plug 'yianwillis/vimcdoc'
 
 "win管理
 Plug 'vim-scripts/winmanager'
+
+
+
 
 " " Initialize plugin system
 call plug#end()
@@ -520,7 +548,7 @@ function AutoUpdateCscopeAndTags()
 endfunction
 
 function AutoUpdateTags()
-    !/usr/bin/ctags -f tags -R --languages=php --fields=+iaS --extra=+q 
+    !/usr/bin/ctags -f tags -R --languages=php --C-kinds=+p --fields=+iaS --extra=+q 
 endfunction
 function AutoCreateCscopeFiles()
     !find  $PWD -name '*.php'> cscope.files
@@ -580,18 +608,19 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 "php开启自动补全
 """"""""""""""""""""""""""""
 "autocmd FileType php set omnifunc=phpcomplete#CompletePHP "如果只有phpcomplete需要打开，如果跟phpcd一起用就使用下面的phpcd中的setlocale
-let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
-let g:phpcomplete_parse_docblock_comments = 1
-let g:phpcomplete_cache_taglists = 1
-let g:phpcomplete_relax_static_constraint = 1
-let g:phpcomplete_complete_for_unknown_classes = 1
-let g:phpcomplete_search_tags_for_variables = 1
-"imap  <leader><leader> <c-x><c-o>
-
-"phpcd设置
-let g:phpcd_php_cli_executable = '/usr/bin/php'
-autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
-let g:phpcd_disable_modifier=0
+"let g:phpcomplete_relax_static_constraint = 1
+"let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
+"let g:phpcomplete_parse_docblock_comments = 1
+"let g:phpcomplete_cache_taglists = 1
+"let g:phpcomplete_relax_static_constraint = 1
+"let g:phpcomplete_complete_for_unknown_classes = 1
+"let g:phpcomplete_search_tags_for_variables = 1
+""关键词补全快捷键
+"
+""phpcd设置
+"let g:phpcd_php_cli_executable = '/usr/bin/php7.2'
+"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+"let g:phpcd_disable_modifier=1
 
 """"""""""""""""""""""""""""
 "DoxygenToolkit
@@ -633,11 +662,11 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
 "  python pylint
-let g:syntastic_python_checkers=['pylint']
-"let g:syntastic_python_checkers=['python']
+"let g:syntastic_python_checkers=['pylint']
+let g:syntastic_python_checkers=['python']
 "php
-"let g:syntastic_php_checkers=['php']
-let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
+let g:syntastic_php_checkers=['php']
+"let g:syntastic_php_checkers=['php', 'phpcs', 'phpmd']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 新文件标题
@@ -721,10 +750,6 @@ nnoremap <F10> :UndotreeToggle<cr>
 ""参考：https://github.com/jonathanfilip/vim-lucius/issues/3"
 "hi ModeMsg ctermfg=Green  #可以颜色主题的vim文件中设置
 
-" cscope 结果输出到 quickfix窗口
-"set cscopequickfix=s-,c-,d-,i-,t-,e- 
-"nmap <C-n> :cnext<CR>
-"nmap <C-p> :cprev<CR>
 if has("cscope")  
     set csprg=/usr/bin/cscope "指定了执行cscpoe的命令 
     set csto=1 "假如’csto’被设置为0，那么cscope数据将会被优先查找，假如cscope没有返回匹配项，然后才会查找tag文件。反之，则查找顺序相反。默认值是0 
@@ -861,10 +886,42 @@ nnoremap <silent> <C-l> :Gblame<CR>
 "使用方法 使用ctrl+n选中多列，s 查找并替换，输入替换字符，按esc即可
 
 set tags+=~/.vim/systags
-set tags+=/webser/www/tags
-set tags+=/webser/www/timingyiinew
+"set tags+=/webser/www/tags
+"set tags+=/webser/www/timingyiinew
 
 "粘贴内容时不自动缩进
 set pastetoggle=<F11> 
 "set vbs=4
 
+"python补全
+let g:pydiction_location = '~/.vim/plugged/pydiction/complete-dict'
+let g:pydiction_menu_height = 20
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+
+set completeopt=longest,menu ""自动补全
+
+
+"只要有~/.vim/dict 就可以添加下面这些自动提示了
+"#函数的自动提示，不需要按<c-x><c-o>,
+"但是只提示函数名称,""<c-x><c-o>可以提示完整的函数参数和类型 
+au FileType php setlocal dict+=~/.vim/dict/php_funclist.dict
+au FileType css setlocal dict+=~/.vim/dict/css.dict
+au FileType c setlocal dict+=~/.vim/dict/c.dict
+au FileType cpp setlocal dict+=~/.vim/dict/cpp.dict
+au FileType scale setlocal dict+=~/.vim/dict/scale.dict
+au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
+au FileType html setlocal dict+=~/.vim/dict/javascript.dict
+au FileType html setlocal dict+=~/.vim/dict/css.dict
+
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd FileType java set omnifunc=javacomplete#Complete
+
+"ctags搜索代码时, 用 ctrl + ] , 缺省情况下, vim会把你带到第一个匹配的地方,
+"该配置可以列出所有匹配列表
+map <c-]> g<c-]>
