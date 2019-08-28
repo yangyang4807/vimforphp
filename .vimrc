@@ -265,8 +265,9 @@ Plug 'vim-scripts/Auto-Pairs'
 "Plug 'ctrlp-modified.vim'
 "Plug 'ctrlp.vim'
 ""grep模糊搜索比较快
-"cscope 已经包含了grep功能，如果关闭cscope， 需要打开，并设置F3快捷键
-"Plug 'vim-scripts/grep.vim'
+"cscope 已经包含了grep功能，如果关闭cscope， 需要打开，并设置F3快捷键,
+"在需要手动输入查询关键词的时候还是很好用的
+Plug 'vim-scripts/grep.vim'
 
 "注释
 Plug 'vim-scripts/DoxygenToolkit.vim'
@@ -348,8 +349,13 @@ Plug 'vim-scripts/Pydiction'
 "python的vim
 "Plug 'prompt-toolkit/pyvim'
 "跳转和移动
-Plug 'Crapworks/python_fn.vim'
+"Plug 'Crapworks/python_fn.vim'
+"可以导入import
 Plug 'fsouza/pythoncomplete.vim'
+"
+"jedi-vim python-mode可以替代pythoncomplete 和Pydiction 但是太慢了
+"Plug 'davidhalter/jedi-vim'
+"Plug 'python-mode/python-mode'
 
 "django, python web框架
 Plug 'vim-scirpts/django_templates.vim'
@@ -365,6 +371,10 @@ Plug 'maksimr/vim-jsbeautify'
 Plug 'pangloss/vim-javascript'
 
 "Plug 'andrewfiorillo/sketch-palettes'
+"
+"
+"go
+Plug 'fatih/vim-go'
 
 "提升速度
 "Plug 'easymotion/vim-easymotion'
@@ -442,8 +452,8 @@ let g:ctrlp_extensions = ['funky']
 "Grep
 """""""""""""""""""""""""""""
 "vim-script/grep
-""如果不使用cscope 就开启Rgrep
-"nnoremap <silent> <F3> :Rgrep<CR>
+""如果不使用cscope 就开启Rgrep,(无论如何。还是要开着的)
+nnoremap <silent> <F3> :Rgrep<CR>
 "grepper
 "nnoremap <silent> <F3> :Grepper<CR>
 
@@ -896,7 +906,6 @@ set pastetoggle=<F11>
 "python补全
 let g:pydiction_location = '~/.vim/plugged/pydiction/complete-dict'
 let g:pydiction_menu_height = 20
-autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 
 set completeopt=longest,menu ""自动补全
@@ -921,6 +930,7 @@ autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType java set omnifunc=javacomplete#Complete
+autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "ctags搜索代码时, 用 ctrl + ] , 缺省情况下, vim会把你带到第一个匹配的地方,
 "该配置可以列出所有匹配列表
