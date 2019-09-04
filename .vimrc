@@ -562,7 +562,10 @@ function AutoUpdateCscopeAndTags()
 endfunction
 
 function AutoUpdateTags()
+    "c
     !/usr/bin/ctags -f tags -R --languages=php --C-kinds=+p --fields=+iaS --extra=+q 
+    "php
+    !/usr/bin/ctags -f tags -R --languages=php --PHP-kinds=+cidfv --fields=+iaS --extra=+q
 endfunction
 function AutoCreateCscopeFiles()
     !find  $PWD -name '*.php'> cscope.files
@@ -622,13 +625,13 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 "php开启自动补全
 """"""""""""""""""""""""""""
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP "如果只有phpcomplete需要打开，如果跟phpcd一起用就使用下面的phpcd中的setlocale
-let g:phpcomplete_relax_static_constraint = 1
-let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
-let g:phpcomplete_parse_docblock_comments = 1
-let g:phpcomplete_cache_taglists = 1
-let g:phpcomplete_relax_static_constraint = 1
-let g:phpcomplete_complete_for_unknown_classes = 1
-let g:phpcomplete_search_tags_for_variables = 1
+"let g:phpcomplete_relax_static_constraint = 1
+"let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
+"let g:phpcomplete_parse_docblock_comments = 1
+"let g:phpcomplete_cache_taglists = 1
+"let g:phpcomplete_relax_static_constraint = 1
+"let g:phpcomplete_complete_for_unknown_classes = 1
+"let g:phpcomplete_search_tags_for_variables = 1
 ""关键词补全快捷键
 "
 ""phpcd设置
@@ -903,11 +906,10 @@ nnoremap <silent> <C-l> :Gblame<CR>
 
 "set tags+=~/.vim/systags
 "set tags+=/webser/www/tags
-"set tags+=/webser/www/timingyiinew
+set tags+=/webser/www/timingyiinew/tags
 
 "粘贴内容时不自动缩进
 set pastetoggle=<F11> 
-"set vbs=4
 
 "python补全
 let g:pydiction_location = '~/.vim/plugged/pydiction/complete-dict'
@@ -933,7 +935,7 @@ autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
 autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType java set omnifunc=javacomplete#Complete
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -941,3 +943,7 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 "ctags搜索代码时, 用 ctrl + ] , 缺省情况下, vim会把你带到第一个匹配的地方,
 "该配置可以列出所有匹配列表
 map <c-]> g<c-]>
+
+
+"DEBUG
+"set vbs=4
