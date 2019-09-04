@@ -333,6 +333,10 @@ Plug 'shawncplus/phpcomplete.vim'
 "编辑过的变量和函数自动弹出, 自定义的
 "由于youcompleteme已经包含了autocompPop,所以开启了youcompleteme就不需要在使用autocomplPop
 Plug 'vim-scripts/AutoComplPop'
+
+"这个包含了很多功能，很有用, 有空看一下
+"Plug 'phpactor/phpactor'
+
 "
 ""PHP CodeSniffer、PHP编码标准修复程序、Linter和Mess检测器支持卓越的文本, 暂时先不用
 Plug 'benmatselby/sublime-phpcs'
@@ -617,20 +621,22 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 """"""""""""""""""""""""""""
 "php开启自动补全
 """"""""""""""""""""""""""""
-"autocmd FileType php set omnifunc=phpcomplete#CompletePHP "如果只有phpcomplete需要打开，如果跟phpcd一起用就使用下面的phpcd中的setlocale
-"let g:phpcomplete_relax_static_constraint = 1
-"let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
-"let g:phpcomplete_parse_docblock_comments = 1
-"let g:phpcomplete_cache_taglists = 1
-"let g:phpcomplete_relax_static_constraint = 1
-"let g:phpcomplete_complete_for_unknown_classes = 1
-"let g:phpcomplete_search_tags_for_variables = 1
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP "如果只有phpcomplete需要打开，如果跟phpcd一起用就使用下面的phpcd中的setlocale
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
+let g:phpcomplete_parse_docblock_comments = 1
+let g:phpcomplete_cache_taglists = 1
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_complete_for_unknown_classes = 1
+let g:phpcomplete_search_tags_for_variables = 1
 ""关键词补全快捷键
 "
 ""phpcd设置
 "let g:phpcd_php_cli_executable = '/usr/bin/php7.2'
 "autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
 "let g:phpcd_disable_modifier=1
+
+"查看omni complete 文档:help compl-omni-filetypes
 
 """"""""""""""""""""""""""""
 "DoxygenToolkit
@@ -895,7 +901,7 @@ nnoremap <silent> <C-l> :Gblame<CR>
 "vim-multiple-cursors
 "使用方法 使用ctrl+n选中多列，s 查找并替换，输入替换字符，按esc即可
 
-set tags+=~/.vim/systags
+"set tags+=~/.vim/systags
 "set tags+=/webser/www/tags
 "set tags+=/webser/www/timingyiinew
 
