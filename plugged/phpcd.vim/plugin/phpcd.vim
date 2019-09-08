@@ -1,7 +1,7 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-let g:phpcd_root = '/'
+let g:phpcd_root = '/' 
 let g:phpcd_php_cli_executable = 'php'
 let g:phpcd_autoload_path = 'vendor/autoload.php'
 let g:phpcd_need_update = 0
