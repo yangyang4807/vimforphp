@@ -325,11 +325,11 @@ Plug 'tpope/vim-surround'
 "第二次改动，youcompleteme 是在时太慢了，果断关掉,世界都变美好了
 "youcompleteme在phpcomplete和phpcd的基础上，原本要使用ctrl+x ctrl+o才能只能补全的，现在一边敲代码一边就能补全了
 "YouCompleteMedu的关键词补全 "使用的是自己的那一套，比如array_slice就只提示array_slice，不提示函数参数这些等，所以不想用他自身的
-"Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 "php的自动补全 phpcd也是代码补全，更快，更高效
 Plug 'shawncplus/phpcomplete.vim'
 "开启了phpcd.vim 导致了不能自动提醒类和方法，没有找到原因，先关闭
-"Plug 'lvht/phpcd.vim'
+Plug 'lvht/phpcd.vim'
 "编辑过的变量和函数自动弹出, 自定义的
 "由于youcompleteme已经包含了autocompPop,所以开启了youcompleteme就不需要在使用autocomplPop
 Plug 'vim-scripts/AutoComplPop'
@@ -624,20 +624,21 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 """"""""""""""""""""""""""""
 "php开启自动补全
 """"""""""""""""""""""""""""
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP "如果只有phpcomplete需要打开，如果跟phpcd一起用就使用下面的phpcd中的setlocale
-"let g:phpcomplete_relax_static_constraint = 1
-"let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
-"let g:phpcomplete_parse_docblock_comments = 1
-"let g:phpcomplete_cache_taglists = 1
-"let g:phpcomplete_relax_static_constraint = 1
-"let g:phpcomplete_complete_for_unknown_classes = 1
-"let g:phpcomplete_search_tags_for_variables = 1
+"autocmd FileType php set omnifunc=phpcomplete#CompletePHP "如果只有phpcomplete需要打开，如果跟phpcd一起用就使用下面的phpcd中的setlocale
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
+let g:phpcomplete_parse_docblock_comments = 1
+let g:phpcomplete_cache_taglists = 1
+let g:phpcomplete_relax_static_constraint = 1
+let g:phpcomplete_complete_for_unknown_classes = 1
+let g:phpcomplete_search_tags_for_variables = 1
 ""关键词补全快捷键
 "
 ""phpcd设置
-"let g:phpcd_php_cli_executable = '/usr/bin/php7.2'
-"autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
-"let g:phpcd_disable_modifier=1
+let g:phpcd_root = '/'
+let g:phpcd_php_cli_executable = '/usr/bin/php7.2'
+autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+let g:phpcd_disable_modifier=0
 
 "查看omni complete 文档:help compl-omni-filetypes
 
@@ -832,7 +833,7 @@ inoremap <leader><leader> <C-x><C-o>
 "youcompleteme自动补全配置
 """""""""""""""""""""""""""
 "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-set completeopt=longest,menu
+"set completeopt=longest,menu
 "离开插入模式后自动关闭预览窗口
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 "回车即选中当前项
@@ -851,7 +852,7 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 "关闭加载.ycm_extra_conf.py提示
 let g:ycm_confirm_extra_conf=1 
 let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
-let g:ycm_min_num_of_chars_for_completion=3 "从第2个键入字符就开始罗列匹配项
+let g:ycm_min_num_of_chars_for_completion=2 "从第2个键入字符就开始罗列匹配项
 let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
 let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
 "nnoremap <F11> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
@@ -906,7 +907,9 @@ nnoremap <silent> <C-l> :Gblame<CR>
 
 "set tags+=~/.vim/systags
 "set tags+=/webser/www/tags
-set tags+=/webser/www/timingyiinew/tags
+"set tags+=/webser/www/timingyiinew/tags
+"set tags+=/webser/www/laravel-master/tags
+set tags+=./tags
 
 "粘贴内容时不自动缩进
 set pastetoggle=<F11> 
@@ -916,7 +919,7 @@ let g:pydiction_location = '~/.vim/plugged/pydiction/complete-dict'
 let g:pydiction_menu_height = 20
 
 
-set completeopt=longest,menu ""自动补全
+"set completeopt=longest,menui,preview ""自动补全
 
 
 "只要有~/.vim/dict 就可以添加下面这些自动提示了
@@ -944,6 +947,10 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 "该配置可以列出所有匹配列表
 map <c-]> g<c-]>
 
+""""""""""""""""""""""
+"todo vim-multiple-cursors
+"""""""""""""""""""""""
+let g:multi_cursor_next_key="\<C-s>"
 
 "DEBUG
 "set vbs=4
