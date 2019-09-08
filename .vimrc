@@ -325,11 +325,15 @@ Plug 'tpope/vim-surround'
 "第二次改动，youcompleteme 是在时太慢了，果断关掉,世界都变美好了
 "youcompleteme在phpcomplete和phpcd的基础上，原本要使用ctrl+x ctrl+o才能只能补全的，现在一边敲代码一边就能补全了
 "YouCompleteMedu的关键词补全 "使用的是自己的那一套，比如array_slice就只提示array_slice，不提示函数参数这些等，所以不想用他自身的
-Plug 'Valloric/YouCompleteMe'
+"
+"业务相关，如果是timingyiinew项目不开启ycm和phpcd
+if $PWD != '/webser/www/timingyiinew'
+    Plug 'Valloric/YouCompleteMe'
+    "开启了phpcd.vim 导致了不能自动提醒类和方法，没有找到原因，先关闭
+    Plug 'lvht/phpcd.vim'
+endif
 "php的自动补全 phpcd也是代码补全，更快，更高效
 Plug 'shawncplus/phpcomplete.vim'
-"开启了phpcd.vim 导致了不能自动提醒类和方法，没有找到原因，先关闭
-Plug 'lvht/phpcd.vim'
 "编辑过的变量和函数自动弹出, 自定义的
 "由于youcompleteme已经包含了autocompPop,所以开启了youcompleteme就不需要在使用autocomplPop
 Plug 'vim-scripts/AutoComplPop'
@@ -563,7 +567,7 @@ endfunction
 
 function AutoUpdateTags()
     "c
-    !/usr/bin/ctags -f tags -R --languages=php --C-kinds=+p --fields=+iaS --extra=+q 
+    "!/usr/bin/ctags -f tags -R --languages=php --C-kinds=+p --fields=+iaS --extra=+q 
     "php
     !/usr/bin/ctags -f tags -R --languages=php --PHP-kinds=+cidfv --fields=+iaS --extra=+q
 endfunction
@@ -624,7 +628,7 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 """"""""""""""""""""""""""""
 "php开启自动补全
 """"""""""""""""""""""""""""
-"autocmd FileType php set omnifunc=phpcomplete#CompletePHP "如果只有phpcomplete需要打开，如果跟phpcd一起用就使用下面的phpcd中的setlocale
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP "如果只有phpcomplete需要打开，如果跟phpcd一起用就使用下面的phpcd中的setlocale
 let g:phpcomplete_relax_static_constraint = 1
 let g:phpcomplete_min_num_of_chars_for_namespace_completion = 1
 let g:phpcomplete_parse_docblock_comments = 1
@@ -633,12 +637,16 @@ let g:phpcomplete_relax_static_constraint = 1
 let g:phpcomplete_complete_for_unknown_classes = 1
 let g:phpcomplete_search_tags_for_variables = 1
 ""关键词补全快捷键
-"
+
+
+"业务相关，如果是timingyiinew项目不开启ycm和phpcd
+if $PWD != '/webser/www/timingyiinew'
 ""phpcd设置
-let g:phpcd_root = '/'
-let g:phpcd_php_cli_executable = '/usr/bin/php7.2'
-autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
-let g:phpcd_disable_modifier=0
+    let g:phpcd_root = '/'
+    let g:phpcd_php_cli_executable = '/usr/bin/php7.2'
+    autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
+    let g:phpcd_disable_modifier=0
+endif
 
 "查看omni complete 文档:help compl-omni-filetypes
 
