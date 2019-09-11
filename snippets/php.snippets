@@ -2,7 +2,7 @@ snippet php
 	<?php
 	${1}
 	?>
-snippet pec
+snippet pecho
 	echo "${1:string}"${2};
 snippet pinc
 	include '${1:file}';${2}
@@ -17,131 +17,73 @@ snippet pglobals
 	$GLOBALS['${1:variable}']${2: = }${3:'something'}${4:;}${5}
 snippet pcookie 
 	$_COOKIE['${1:variable}']${2:;}${3}
-snippet pcookie= 
+snippet pcookiev 
 	$_COOKIE['${1:variable}']${2: = }${3:''}${4:;}${5}
 snippet penv 
 	$_ENV['${1:variable}']${2:;}${3}
-snippet penv= 
+snippet penvv 
 	$_ENV['${1:variable}']${2: = }${3:''}${4:;}${5}
 snippet pfiles 
 	$_FILES['${1:variable}']${2:;}${3}
-snippet pfiles= 
+snippet pfilesv 
 	$_FILES['${1:variable}']${2: = }${3:''}${4:;}${5}
 snippet pget 
 	$_GET['${1:variable}']${2:;}${3}
-snippet pget= 
+snippet pgetv 
 	$_GET['${1:variable}']${2: = }${3:''}${4:;}${5}
 snippet ppost 
 	$_POST['${1:variable}']${2:;}${3}
-snippet ppost= 
+snippet ppostv 
 	$_POST['${1:variable}']${2: = }${3:''}${4:;}${5}
 snippet preq 
 	$_REQUEST['${1:variable}']${2:;}${3}
-snippet preq= 
+snippet preqv 
 	$_REQUEST['${1:variable}']${2: = }${3:''}${4:;}${5}
 snippet pser 
 	$_SERVER['${1:variable}']${2:;}${3}
-snippet pser= 
+snippet pserv 
 	$_SERVER['${1:variable}']${2: = }${3:''}${4:;}${5}
 snippet psess 
 	$_SESSION['${1:variable}']${2:;}${3}
-snippet psess= 
+snippet psessv 
 	$_SESSION['${1:variable}']${2: = }${3:''}${4:;}${5}
 
 # Start Docblock
 snippet /*
 	/**
 	 * ${1}
-	 **/
-# Class - post doc
-snippet doc_cp
-	/**
-	 * ${1:undocumented class}
-	 *
-	 * @package ${2:default}
-	 * @author ${3:`g:snips_author`}
-	**/${4}
-# Class Variable - post doc
-snippet doc_vp
-	/**
-	 * ${1:undocumented class variable}
-	 *
-	 * @var ${2:string}
-	 **/${3}
-# Class Variable
-snippet doc_v
-	/**
-	 * ${3:undocumented class variable}
-	 *
-	 * @var ${4:string}
-	 **/
-	${1:var} $${2};${5}
+	 */
 # Class
-snippet doc_c
+snippet pdocc
 	/**
 	 * ${3:undocumented class}
 	 *
-	 * @packaged ${4:default}
+	 * @version ${4:default}
 	 * @author ${5:`g:snips_author`}
-	 **/
-	${1:}class ${2:ClassName}
-	{${6}
-	}
-# Constant Definition - post doc
-snippet doc_dp
+	 */
+# Function doc 
+snippet pdocf
 	/**
-	 * ${1:undocumented constant}
-	 **/${2}
-# Constant Definition
-snippet doc_d
-	/**
-	 * ${3:undocumented constant}
-	 **/
-	define(${1}, ${2});${4}
-# Function - post doc
-snippet doc_fp
-	/**
-	 * ${1:undocumented function}
-	 *
-	 * @return ${2:void}
-	 * @author ${3:`g:snips_author`}
-	 **/${4}
-# Function signature
-snippet doc_s
-	/**
-	 * ${4:undocumented function}
-	 *
-	 * @return ${5:void}
-	 * @author ${6:`g:snips_author`}
-	 **/
-	${1}function ${2}(${3});${7}
-# Function
-snippet doc_f
-	/**
-	 * ${4:undocumented function}
-	 *
-	 * @return ${5:void}
-	 * @author ${6:`g:snips_author`}
-	 **/
-	${1}function ${2}(${3})
-	{${7}
-	}
-# Header
-snippet doc_h
+	 * ${7} 
+	 * 
+	 * @param ${6}
+	 * @return ${5}
+	 * @author ${8:`g:snips_author`}
+	 */
+# Header doc
+snippet pdoch
 	/**
 	 * ${1}
 	 *
 	 * @author ${2:`g:snips_author`}
 	 * @version ${3:$Id$}
-	 * @copyright ${4:$2}, `strftime('%d %B, %Y')`
-	 * @package ${5:default}
-	 **/
+	 */
 	
 	/**
 	 * Define DocBlock
 	 *//
-# Interface
-snippet doc_i
+
+snippet pinterface 
 	/**
 	 * ${2:undocumented interface}
 	 *
@@ -152,28 +94,31 @@ snippet doc_i
 	{${5}
 		${6}
 	}
-snippet pinter 
-	interface ${1:interfaceName}
-	{${5}
-		${6}
-	}
 # class ...
 snippet pclass
-	class ${2:ClassName}
+	/**
+	 * ${3:undocumented class}
+	 *
+	 * @package ${8:default}
+	 * @author ${7:`g:snips_author`}
+	 */
+	class ${1:ClassName}
 	{
 		${3}
-		function ${4:__construct}(${5:$argument})
+		function ${4:__construct}(${5})
 		{
 			${6}
 		}
 	}
 # define(...)
 snippet pdef
-	define('${1}'${2});${3}
+	// ${3}
+	define('${1}', '${2}');${3}
 # defined(...)
-snippet pdef?
-	${1}defined('${2}')${3} or define('${4}', '${5}');${6}
-snippet pwh
+snippet pdefd
+	// ${4}
+	defined('${1}')${3} or define('${2}', '${5}');${6}
+snippet pwhile
 	while (${1}) {
 		${2}
 	}
@@ -219,63 +164,130 @@ snippet pcase
 		${2}
 		break;${3}
 snippet pfor
-	for ($${2:i} = 0; $$2 < ${1:count}; $$2${3:++}) {
+	for ($${2:i} = 0; $$2 < $${1:count}; $$2${3:++}) {
 		${4}
 	}
 snippet pforeach
-	foreach ($${1:key} as $${2:value}) {
+	foreach ($${1} as $${2}) {
 		${3}
 	}
 snippet pfun
-	function ${2:func_name}()
+	/**
+	 * ${7} 
+	 * 
+	 * @param ${6}
+	 * @return ${5}
+	 * @author ${8:`g:snips_author`}
+	 */
+	function ${1:func_name}()
 	{
 		${4}
 	}
+snippet pfuns
+	/**
+	 * ${7} 
+	 * 
+	 * @param ${6}
+	 * @author ${8:`g:snips_author`}
+	 */
+	function ${1:func_name}(); ${4}
 snippet pubfun
-	${1:public }function ${2:FunctionName}(${3})
+	/**
+	 * ${7} 
+	 * 
+	 * @param ${6}
+	 * @return ${5}
+	 * @author ${8:`g:snips_author`}
+	 */
+	${2:public }function ${1:FunctionName}(${3})
 	{
 		${4}
 	}
+snippet pubfuns
+	/**
+	 * ${7} 
+	 * 
+	 * @param ${6}
+	 * @return ${5}
+	 * @author ${8:`g:snips_author`}
+	 */
+	${2:public }function ${1:func_name}(); ${4}
 snippet pubstafun
-	${1:public static }function ${2:FunctionName}(${3})
+	/**
+	 * ${7} 
+	 * 
+	 * @param ${6}
+	 * @return ${5}
+	 * @author ${8:`g:snips_author`}
+	 */
+	${2:public static }function ${1:FunctionName}(${3})
 	{
 		${4}
 	}
 snippet prifun
-	${1:private }function ${2:FunctionName}(${3})
+	/**
+	 * ${7} 
+	 * 
+	 * @param ${6}
+	 * @return ${5}
+	 * @author ${8:`g:snips_author`}
+	 */
+	${2:private }function ${1:FunctionName}(${3})
 	{
 		${4}
 	}
 snippet pristafun
-	${1:private static }function ${2:FunctionName}(${3})
+	/**
+	 * ${7} 
+	 * 
+	 * @param ${6}
+	 * @return ${5}
+	 * @author ${8:`g:snips_author`}
+	 */
+	${2:private static }function ${1:FunctionName}(${3})
 	{
 		${4}
 	}
 snippet profun
-	${1:protected }function ${2:FunctionName}(${3})
+	/**
+	 * ${7} 
+	 * 
+	 * @param ${6}
+	 * @return ${5}
+	 * @author ${8:`g:snips_author`}
+	 */
+	${2:protected }function ${1:FunctionName}(${3})
 	{
 		${4}
 	}
 snippet prostafun
-	${1:protected static }function ${2:FunctionName}(${3})
+	/**
+	 * ${7} 
+	 * 
+	 * @param ${6}
+	 * @return ${5}
+	 * @author ${8:`g:snips_author`}
+	 */
+	${2:protected static }function ${1:FunctionName}(${3})
 	{
 		${4}
 	}
 # $... = array (...)
 # $... = array (...)
 snippet parray
-	${1:$arrayName} = [
+	$${1:arrayName} = [
 		'${2}' => '${3}' ${4:,}
 	];${5}
 
 
 snippet ptry
 	try {
-	
+		${1}	
 	} catch (\Exception $e) {
 		echo $e->getMessage();
 	}
 
 snippet peof
 	echo <<<EOF
+	${1}
 	EOF;
