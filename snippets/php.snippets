@@ -164,7 +164,7 @@ snippet pclass
 		${3}
 		function ${4:__construct}(${5:$argument})
 		{
-			${6:// code...}
+			${6}
 		}
 	}
 # define(...)
@@ -175,31 +175,31 @@ snippet pdef?
 	${1}defined('${2}')${3} or define('${4}', '${5}');${6}
 snippet pwh
 	while (${1}) {
-		${2:// code...}
+		${2}
 	}
 # do ... while
 snippet pdo
 	do {
-		${2:// code... }
+		${2}
 	} while (${1});
 snippet pif
 	if (${1}) {
-		${2:// code...}
+		${2}
 	}
 snippet pife
 	if (${1}) {
-		${2:// code...}
+		${2}
 	} else {
-		${3:// code...}
+		${3}
 	}
 	${4}
 snippet pelse
 	else {
-		${1:// code...}
+		${1}
 	}
 snippet pelseif
 	elseif (${1}) {
-		${2:// code...}
+		${2}
 	}
 # Tertiary conditional
 snippet pt
@@ -207,59 +207,59 @@ snippet pt
 snippet pswitch
 	switch ($${1:variable}) {
 		case '${2:value}':
-			${3:// code...}
+			${3}
 			break;
 		${5}
 		default:
-			${4:// code...}
+			${4}
 			break;
 	}
 snippet pcase
 	case '${1:value}':
-		${2:// code...}
+		${2}
 		break;${3}
 snippet pfor
 	for ($${2:i} = 0; $$2 < ${1:count}; $$2${3:++}) {
-		${4: // code...}
+		${4}
 	}
 snippet pforeach
 	foreach ($${1:key} as $${2:value}) {
-		${3:// code...}
+		${3}
 	}
 snippet pfun
 	function ${2:func_name}()
 	{
-		${4:// code...}
+		${4}
 	}
 snippet pubfun
 	${1:public }function ${2:FunctionName}(${3})
 	{
-		${4:// code...}
+		${4}
 	}
 snippet pubstafun
 	${1:public static }function ${2:FunctionName}(${3})
 	{
-		${4:// code...}
+		${4}
 	}
 snippet prifun
 	${1:private }function ${2:FunctionName}(${3})
 	{
-		${4:// code...}
+		${4}
 	}
 snippet pristafun
 	${1:private static }function ${2:FunctionName}(${3})
 	{
-		${4:// code...}
+		${4}
 	}
 snippet profun
 	${1:protected }function ${2:FunctionName}(${3})
 	{
-		${4:// code...}
+		${4}
 	}
 snippet prostafun
 	${1:protected static }function ${2:FunctionName}(${3})
 	{
-		${4:// code...}
+		${4}
 	}
 # $... = array (...)
 # $... = array (...)
