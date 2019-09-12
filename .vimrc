@@ -5,7 +5,6 @@
 "au FileType php setlocal comments-=:// comments+=f://
 "可以在需要粘贴之前执行一下 set paste
 "set paste
-
 syntax on
 syntax enable
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示
@@ -948,7 +947,8 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 
 autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType java set omnifunc=javacomplete#Complete
+"autocmd FileType java set omnifunc=javacomplete#Complete
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 
 "ctags搜索代码时, 用 ctrl + ] , 缺省情况下, vim会把你带到第一个匹配的地方,
@@ -959,6 +959,46 @@ map <c-]> g<c-]>
 "todo vim-multiple-cursors
 """""""""""""""""""""""
 let g:multi_cursor_next_key="\<C-s>"
+
+"不生效
+inoremap { {<CR>}<Up><Enter>
+
+"if exists("g:equ")
+:inoremap = <c-r>=EqualSign('=')<CR>
+:inoremap + <c-r>=EqualSign('+')<CR>
+:inoremap - <c-r>=EqualSign('-')<CR>
+":inoremap * <c-r>=EqualSign('*')<CR>
+":inoremap / <c-r>=EqualSign('/')<CR>
+:inoremap > <c-r>=EqualSign('>')<CR>
+:inoremap < <c-r>=EqualSign('<')<CR>
+:inoremap , ,<space>
+"endif
+
+
+function! EqualSign(char)
+    if a:char  =~ '='  && getline('.') =~ ".*("
+        return a:char
+    endif 
+    let ex1 = getline('.')[col('.') - 3]
+    let ex2 = getline('.')[col('.') - 2]
+
+
+    if ex1 =~ "[-=+><>\/\*]"
+        if ex2 !~ "\s"
+            return "\<ESC>i".a:char."\<SPACE>"
+        else
+            return "\<ESC>xa".a:char."\<SPACE>"
+        endif 
+    else
+        if ex2 !~ "\s"
+            return "\<SPACE>".a:char."\<SPACE>\<ESC>a"
+        else
+            return a:char."\<SPACE>\<ESC>a"
+        endif 
+    endif
+endfunction
+
+let g:snips_author = 'yuyangyang'
 
 "DEBUG
 "set vbs=4
