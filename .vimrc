@@ -964,14 +964,15 @@ let g:multi_cursor_next_key="\<C-s>"
 inoremap { {<CR>}<Up><Enter>
 
 "if exists("g:equ")
-:inoremap = <c-r>=EqualSign('=')<CR>
-:inoremap + <c-r>=EqualSign('+')<CR>
-:inoremap - <c-r>=EqualSign('-')<CR>
+":inoremap = <c-r>=EqualSign('=')<CR>
+":inoremap . <c-r>=EqualSign('.')<CR>
+":inoremap + <c-r>=EqualSign('+')<CR>
+":inoremap - <c-r>=EqualSign('-')<CR>
 ":inoremap * <c-r>=EqualSign('*')<CR>
 ":inoremap / <c-r>=EqualSign('/')<CR>
-:inoremap > <c-r>=EqualSign('>')<CR>
-:inoremap < <c-r>=EqualSign('<')<CR>
-:inoremap , ,<space>
+":inoremap > <c-r>=EqualSign('>')<CR>
+":inoremap < <c-r>=EqualSign('<')<CR>
+":inoremap , ,<space>
 "endif
 
 
