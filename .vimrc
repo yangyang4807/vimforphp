@@ -556,6 +556,7 @@ set termencoding=utf-8
 """"""""""""""""""""""""""""
 "map <F4> :!/usr/bin/ctags -f tags -R --languages=php --fields=+iaS --extra=+q<cr>
 nmap <F4> :call AutoUpdateCscopeAndTags()<cr> 
+noremap <F4> :call AutoUpdateCscopeAndTags()<cr> 
 
 function AutoUpdateCscopeAndTags() 
     call AutoUpdateTags()
@@ -642,7 +643,7 @@ let g:phpcomplete_search_tags_for_variables = 1
 if $PWD != '/webser/www/timingyiinew'
 ""phpcd设置
     let g:phpcd_root = '/'
-    let g:phpcd_php_cli_executable = '/usr/bin/php7.2'
+    let g:phpcd_php_cli_executable = '/usr/bin/php7.3'
     autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
     let g:phpcd_disable_modifier=0
 endif
@@ -894,7 +895,7 @@ let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
 " " Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/'  }  }
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/'  },'php':{'left':'//','right':''} }
 "" Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
@@ -1003,3 +1004,9 @@ let g:snips_author = 'yuyangyang'
 
 "DEBUG
 "set vbs=4
+"
+"开启多个窗口的同步滚动
+"set scrollbind
+"windo表示所有窗口
+map <leader>ss :windo set scrollbind<CR>
+map <leader>sc :windo set noscrollbind<CR>
