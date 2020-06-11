@@ -328,7 +328,8 @@ Plug 'tpope/vim-surround'
 "业务相关，如果是timingyiinew项目不开启ycm和phpcd
 if $PWD != '/webser/www/timingyiinew'
     Plug 'Valloric/YouCompleteMe'
-    "开启了phpcd.vim 导致了不能自动提醒类和方法，没有找到原因，先关闭
+    "开启了phpcd.vim
+    "导致了不能自动提醒类和方法，是因为没有自动加载，特别是yii框架，autoload没有加载业务代码到vendor/composer/autoload.php这类文件中，但是laravel是有加载的，所有laravel可以用
     Plug 'lvht/phpcd.vim'
 endif
 "php的自动补全 phpcd也是代码补全，更快，更高效
