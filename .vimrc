@@ -555,7 +555,7 @@ set termencoding=utf-8
 "映射,F4执行ctags命令
 """"""""""""""""""""""""""""
 "map <F4> :!/usr/bin/ctags -f tags -R --languages=php --fields=+iaS --extra=+q<cr>
-map <F4> :call AutoUpdateCscopeAndTags()<cr> 
+nmap <F4> :call AutoUpdateCscopeAndTags()<cr> 
 
 function AutoUpdateCscopeAndTags() 
     call AutoUpdateTags()
