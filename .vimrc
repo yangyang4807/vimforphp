@@ -1,8 +1,8 @@
 """"""""""""""""""""""""""""
 " 显示相关
 """"""""""""""""""""""""""""
-"取消换行自动注释
-"au FileType php setlocal comments-=:// comments+=f://
+"取消换行自动注释, 这个没有用
+" au FileType php setlocal comments-=:// comments+=f://
 "可以在需要粘贴之前执行一下 set paste
 "set paste
 syntax on
@@ -273,8 +273,17 @@ Plug 'vim-scripts/DoxygenToolkit.vim'
 ""快速注释
 Plug 'scrooloose/nerdcommenter'
 
+" phpdoc
+" Plug 'vim-scripts/PDV--phpDocumentor-for-Vim'
+
+" https://github.com/tobyS/pdv
+" 这个太旧了 php会报错
+" Plug 'tobyS/pdv'
+
+Plug 'Rican7/php-doc-modded'
+
 ""用细竖线显示缩进级别
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 
 Plug 'vim-scripts/L9'
 ":w
@@ -327,9 +336,8 @@ Plug 'tpope/vim-surround'
 "
 "业务相关，如果是timingyiinew项目不开启ycm和phpcd
 if $PWD != '/webser/www/timingyiinew'
-    Plug 'Valloric/YouCompleteMe'
-    "开启了phpcd.vim
-    "导致了不能自动提醒类和方法，是因为没有自动加载，特别是yii框架，autoload没有加载业务代码到vendor/composer/autoload.php这类文件中，但是laravel是有加载的，所有laravel可以用
+    " Plug 'Valloric/YouCompleteMe'
+    "开启了phpcd.vim 导致了不能自动提醒类和方法，没有找到原因，先关闭
     Plug 'lvht/phpcd.vim'
 endif
 "php的自动补全 phpcd也是代码补全，更快，更高效
@@ -557,7 +565,6 @@ set termencoding=utf-8
 """"""""""""""""""""""""""""
 "map <F4> :!/usr/bin/ctags -f tags -R --languages=php --fields=+iaS --extra=+q<cr>
 nmap <F4> :call AutoUpdateCscopeAndTags()<cr> 
-noremap <F4> :call AutoUpdateCscopeAndTags()<cr> 
 
 function AutoUpdateCscopeAndTags() 
     call AutoUpdateTags()
@@ -644,7 +651,7 @@ let g:phpcomplete_search_tags_for_variables = 1
 if $PWD != '/webser/www/timingyiinew'
 ""phpcd设置
     let g:phpcd_root = '/'
-    let g:phpcd_php_cli_executable = '/usr/bin/php7.3'
+    let g:phpcd_php_cli_executable = '/usr/bin/php'
     autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
     let g:phpcd_disable_modifier=0
 endif
@@ -896,7 +903,7 @@ let g:NERDDefaultAlign = 'left'
 " Set a language to use its alternate delimiters by default
 let g:NERDAltDelims_java = 1
 " " Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/'  },'php':{'left':'//','right':''} }
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/'  }  }
 "" Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
@@ -1006,8 +1013,29 @@ let g:snips_author = 'yuyangyang'
 "DEBUG
 "set vbs=4
 "
-"开启多个窗口的同步滚动
-"set scrollbind
-"windo表示所有窗口
-map <leader>ss :windo set scrollbind<CR>
-map <leader>sc :windo set noscrollbind<CR>
+"fish 和bash 的语法不一样，所以不能让vim 使用 fish 作为外部解释器
+if &shell =~ '/bin/fish'
+    set shell=/bin/bash
+endif
+
+" 修改默认编辑器
+"export EDITOR=/usr/local/bin/vim
+" fish 和bash 的语法不一样，所以你不能让vim 使用 fish 作为外部解释器
+ if &shell =~ '/bin/fish'
+     set shell=/bin/bash
+ endif
+
+" 禁止换行自动生成注释c
+ augroup Format-Options
+    autocmd!
+    autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+    " This can be done as well instead of the previous line, for setting formatoptions as you choose:
+    autocmd BufEnter * setlocal formatoptions=crqn2l1j
+augroup END
+
+
+" PHP documenter script bound to Control-P
+autocmd FileType php inoremap <C-p> <ESC>:call PhpDocSingle()<CR>i
+autocmd FileType php nnoremap <C-p> :call PhpDocSingle()<CR>
+autocmd FileType php vnoremap <C-p> :call PhpDocRange()<CR>
