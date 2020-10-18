@@ -149,6 +149,8 @@ snippet pelseif
 # Tertiary conditional
 snippet pt
 	$${1:retVal} = ${2:condition} ? ${3:a} : ${4:b};${5}
+snippet ptt 
+	$${1:retVal} = $${2:retVal} ?? ${3:a};${5}
 snippet pswitch
 	switch ($${1:variable}) {
 		case '${2:value}':
@@ -173,11 +175,14 @@ snippet pforeach
 	}
 snippet pfun
 	/**
+	 * @Purpose:
 	 * ${7} 
 	 * 
 	 * @param ${6}
 	 * @return ${5}
-	 * @author ${8:`g:snips_author`}
+	 * User: ${8:`g:snips_author`}
+	 * Date: ${9:`g:snips_date`} 
+	 * Time: ${10:`g:snips_time`} 
 	 */
 	function ${1:func_name}()
 	{
@@ -185,19 +190,28 @@ snippet pfun
 	}
 snippet pfuns
 	/**
-	 * ${7} 
-	 * 
-	 * @param ${6}
-	 * @author ${8:`g:snips_author`}
-	 */
-	function ${1:func_name}(); ${4}
-snippet pubfun
-	/**
+	 * @Purpose:
 	 * ${7} 
 	 * 
 	 * @param ${6}
 	 * @return ${5}
-	 * @author ${8:`g:snips_author`}
+	 * @throws \Throwable
+	 * User: ${8:`g:snips_author`}
+	 * Date: ${9:`g:snips_date`} 
+	 * Time: ${10:`g:snips_time`} 
+	 */
+	function ${1:func_name}(); ${4}
+snippet pubfun
+	/**
+	 * @Purpose:
+	 * ${1} 
+	 * 
+	 * @param ${6}
+	 * @return ${5}
+	 * @throws \Throwable
+	 * User: ${8:`g:snips_author`}
+	 * Date: ${9:`g:snips_date`} 
+	 * Time: ${10:`g:snips_time`} 
 	 */
 	${2:public }function ${1:FunctionName}(${3})
 	{
@@ -205,20 +219,28 @@ snippet pubfun
 	}
 snippet pubfuns
 	/**
+	 * @Purpose:
 	 * ${7} 
 	 * 
 	 * @param ${6}
 	 * @return ${5}
-	 * @author ${8:`g:snips_author`}
+	 * @throws \Throwable
+	 * User: ${8:`g:snips_author`}
+	 * Date: ${9:`g:snips_date`} 
+	 * Time: ${10:`g:snips_time`} 
 	 */
 	${2:public }function ${1:func_name}(); ${4}
 snippet pubstafun
 	/**
+	 * @Purpose:
 	 * ${7} 
 	 * 
 	 * @param ${6}
 	 * @return ${5}
-	 * @author ${8:`g:snips_author`}
+	 * @throws \Throwable
+	 * User: ${8:`g:snips_author`}
+	 * Date: ${9:`g:snips_date`} 
+	 * Time: ${10:`g:snips_time`} 
 	 */
 	${2:public static }function ${1:FunctionName}(${3})
 	{
@@ -226,11 +248,15 @@ snippet pubstafun
 	}
 snippet prifun
 	/**
+	 * @Purpose:
 	 * ${7} 
 	 * 
 	 * @param ${6}
 	 * @return ${5}
-	 * @author ${8:`g:snips_author`}
+	 * @throws \Throwable
+	 * User: ${8:`g:snips_author`}
+	 * Date: ${9:`g:snips_date`} 
+	 * Time: ${10:`g:snips_time`} 
 	 */
 	${2:private }function ${1:FunctionName}(${3})
 	{
@@ -238,11 +264,15 @@ snippet prifun
 	}
 snippet pristafun
 	/**
+	 * @Purpose:
 	 * ${7} 
 	 * 
 	 * @param ${6}
 	 * @return ${5}
-	 * @author ${8:`g:snips_author`}
+	 * @throws \Throwable
+	 * User: ${8:`g:snips_author`}
+	 * Date: ${9:`g:snips_date`} 
+	 * Time: ${10:`g:snips_time`} 
 	 */
 	${2:private static }function ${1:FunctionName}(${3})
 	{
@@ -250,11 +280,15 @@ snippet pristafun
 	}
 snippet profun
 	/**
+	 * @Purpose:
 	 * ${7} 
 	 * 
 	 * @param ${6}
 	 * @return ${5}
-	 * @author ${8:`g:snips_author`}
+	 * @throws \Throwable
+	 * User: ${8:`g:snips_author`}
+	 * Date: ${9:`g:snips_date`} 
+	 * Time: ${10:`g:snips_time`} 
 	 */
 	${2:protected }function ${1:FunctionName}(${3})
 	{
@@ -262,11 +296,15 @@ snippet profun
 	}
 snippet prostafun
 	/**
+	 * @Purpose:
 	 * ${7} 
 	 * 
 	 * @param ${6}
 	 * @return ${5}
-	 * @author ${8:`g:snips_author`}
+	 * @throws \Throwable
+	 * User: ${8:`g:snips_author`}
+	 * Date: ${9:`g:snips_date`} 
+	 * Time: ${10:`g:snips_time`} 
 	 */
 	${2:protected static }function ${1:FunctionName}(${3})
 	{
