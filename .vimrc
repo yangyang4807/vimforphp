@@ -577,7 +577,7 @@ function AutoUpdateTags()
     "c
     "!/usr/bin/ctags -f tags -R --languages=php --C-kinds=+p --fields=+iaS --extra=+q 
     "php
-    !/usr/bin/ctags -f tags -R --languages=php --PHP-kinds=+cidfv --fields=+iaS --extra=+q
+    !/usr/bin/ctags -f tags -R --languages=php --PHP-kinds=+cidfv --fields=+iaS --extra=+q --exclude=$PWD/runtime
 endfunction
 function AutoCreateCscopeFiles()
     !find  $PWD -name '*.php'> cscope.files
@@ -969,9 +969,10 @@ map <c-]> g<c-]>
 """""""""""""""""""""""
 let g:multi_cursor_next_key="\<C-s>"
 
-"不生效
+"他没有生效
 inoremap { {<CR>}<Up><Enter>
 
+"设置= + - * 前后自动空格
 "if exists("g:equ")
 ":inoremap = <c-r>=EqualSign('=')<CR>
 ":inoremap . <c-r>=EqualSign('.')<CR>
@@ -1008,7 +1009,10 @@ function! EqualSign(char)
     endif
 endfunction
 
+" snipMate 设置全局变量
 let g:snips_author = 'yuyangyang'
+let g:snips_date = strftime("%Y/%m/%d") 
+let g:snips_time = strftime("%H:%M") 
 
 "DEBUG
 "set vbs=4
@@ -1026,16 +1030,19 @@ endif
  endif
 
 " 禁止换行自动生成注释c
- augroup Format-Options
-    autocmd!
-    autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-    " This can be done as well instead of the previous line, for setting formatoptions as you choose:
-    autocmd BufEnter * setlocal formatoptions=crqn2l1j
-augroup END
+"  augroup Format-Options
+    " autocmd!
+    " " autocmd BufEnter * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+    " autocmd BufEnter * setlocal formatoptions-=c  formatoptions-=o
+    "
+    " " This can be done as well instead of the previous line, for setting formatoptions as you choose:
+    " autocmd BufEnter * setlocal formatoptions=crqn2l1j
+" augroup END
 
 
 " PHP documenter script bound to Control-P
 autocmd FileType php inoremap <C-p> <ESC>:call PhpDocSingle()<CR>i
 autocmd FileType php nnoremap <C-p> :call PhpDocSingle()<CR>
 autocmd FileType php vnoremap <C-p> :call PhpDocRange()<CR>
+
+
