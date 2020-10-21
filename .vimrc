@@ -973,17 +973,20 @@ let g:multi_cursor_next_key="\<C-s>"
 inoremap { {<CR>}<Up><Enter>
 
 "设置= + - * 前后自动空格
-"if exists("g:equ")
-":inoremap = <c-r>=EqualSign('=')<CR>
-":inoremap . <c-r>=EqualSign('.')<CR>
-":inoremap + <c-r>=EqualSign('+')<CR>
-":inoremap - <c-r>=EqualSign('-')<CR>
-":inoremap * <c-r>=EqualSign('*')<CR>
-":inoremap / <c-r>=EqualSign('/')<CR>
-":inoremap > <c-r>=EqualSign('>')<CR>
-":inoremap < <c-r>=EqualSign('<')<CR>
-":inoremap , ,<space>
-"endif
+let g:equ=1
+if exists("g:equ")
+:inoremap = <c-r>=EqualSign('=')<CR>
+:inoremap . <c-r>=EqualSign('.')<CR>
+:inoremap + <c-r>=EqualSign('+')<CR>
+:inoremap - <c-r>=EqualSign('-')<CR>
+:inoremap * <c-r>=EqualSign('*')<CR>
+:inoremap / <c-r>=EqualSign('/')<CR>
+:inoremap > <c-r>=EqualSign('>')<CR>
+:inoremap < <c-r>=EqualSign('<')<CR>
+:inoremap , ,<space>
+:inoremap -> ->
+:inoremap >=  <c-r>=EqualSign('>=')<CR>
+endif
 
 
 function! EqualSign(char)
@@ -994,7 +997,12 @@ function! EqualSign(char)
     let ex2 = getline('.')[col('.') - 2]
 
 
-    if ex1 =~ "[-=+><>\/\*]"
+
+    " if ex1 =~ "[-=+><>\/\*]"
+    " 去掉>是为了满足$this->a这种结构, 但是不能满 足>=   所有单独对>= 做映射     
+    " \<ESC>表示光标向左移动一个位置
+    ".+-*/<       
+    if ex1 =~ "[.-=+<\/\*]"
         if ex2 !~ "\s"
             return "\<ESC>i".a:char."\<SPACE>"
         else
