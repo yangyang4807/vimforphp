@@ -347,5 +347,26 @@ snippet pjsond
 	json_decode(${1}, true);
 
 snippet pechoerror 
-	echo $e->message(), $e->getFile() , $e->getLine();	
+	echo $e->getMessage(), $e->getFile() , $e->getLine();	
 
+snippet pnr 
+	echo "\r\n";
+
+snippet pemp 
+	empty(${1})
+	
+snippet pdate 
+	date('Y-m-d H:i:s', ${1});
+
+snippet /**  
+	/** 
+	 * ${1} 
+	 */
+snippet $this  
+	$this->${1}
+
+snippet self 
+	self::${1}
+
+snippet stati 
+	static::${1}

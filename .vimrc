@@ -334,12 +334,18 @@ Plug 'tpope/vim-surround'
 "youcompleteme在phpcomplete和phpcd的基础上，原本要使用ctrl+x ctrl+o才能只能补全的，现在一边敲代码一边就能补全了
 "YouCompleteMedu的关键词补全 "使用的是自己的那一套，比如array_slice就只提示array_slice，不提示函数参数这些等，所以不想用他自身的
 "
+"
 "业务相关，如果是timingyiinew项目不开启ycm和phpcd
+if &filetype == 'php'
 if $PWD != '/webser/www/timingyiinew'
     " Plug 'Valloric/YouCompleteMe'
     "开启了phpcd.vim 导致了不能自动提醒类和方法，没有找到原因，先关闭
     Plug 'lvht/phpcd.vim'
 endif
+endif
+" if &filetype == 'go'
+    " Plug 'Valloric/YouCompleteMe'
+" endif
 "php的自动补全 phpcd也是代码补全，更快，更高效
 Plug 'shawncplus/phpcomplete.vim'
 "编辑过的变量和函数自动弹出, 自定义的
@@ -391,6 +397,10 @@ Plug 'pangloss/vim-javascript'
 "
 "go
 Plug 'fatih/vim-go'
+" Plug 'volgar1x/vim-gocode'
+" Vim-go默认是用ultisnips引擎插件
+Plug 'SirVer/ultisnips'
+
 
 "提升速度
 "Plug 'easymotion/vim-easymotion'
@@ -959,6 +969,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 "autocmd FileType java set omnifunc=javacomplete#Complete
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType go set omnifunc=gocomplete#Complete
 
 "ctags搜索代码时, 用 ctrl + ] , 缺省情况下, vim会把你带到第一个匹配的地方,
 "该配置可以列出所有匹配列表
@@ -973,28 +984,66 @@ let g:multi_cursor_next_key="\<C-s>"
 inoremap { {<CR>}<Up><Enter>
 
 
-:inoremap , ,<space>
+" :inoremap , ,<space>
+:inoremap ?? <space>??<space>
 :inoremap -> ->
 
+:inoremap = <space>=<space>
+:inoremap == <space>==<space>
+:inoremap == <space>==<space>
+:inoremap === <space>===<space>
+:inoremap > <space>><space>
+:inoremap < <space><<space>
+:inoremap >= <space>>=<space>
+:inoremap <= <space><=<space>
+:inoremap != <space>!=<space>
+:inoremap && <space>&&<space>
+:inoremap \|\| <space>\|\|<space>
+" :inoremap & <space>&<space>
+:inoremap \| <space>\|<space>
+:inoremap + <space>+<space>
+:inoremap += <space>+=<space>
+:inoremap - <space>-<space>
+:inoremap -= <space>-=<space>
+" :inoremap * <space>*<space>
+:inoremap *= <space>*=<space>
+:inoremap / <space>/<space>
+:inoremap /= <space>/=<space>
+:inoremap := <space>:=<space>
+" :inoremap . <space>.<space>
+:inoremap .= <space>.=<space>
+:inoremap // //
+" :inoremap => =>
+:inoremap => <space>=><space>
+:inoremap /* /*
+:inoremap /** /**
+:inoremap */ */
+:inoremap \? <space>\?<space>
+" :inoremap : <space>:<space>
+:inoremap :: ::
+:inoremap ++ ++
+:inoremap -- --
 "设置= + - * 前后自动空格
 let g:equ=1
 if exists("g:equ")
-:inoremap = <c-r>=EqualSign('=')<CR>
-" :inoremap == <c-r>=EqualSign('==')<CR>
-" :inoremap === <c-r>=EqualSign('===')<CR>
-:inoremap . <c-r>=EqualSign('.')<CR>
-:inoremap + <c-r>=EqualSign('+')<CR>
-:inoremap - <c-r>=EqualSign('-')<CR>
-:inoremap * <c-r>=EqualSign('*')<CR>
-:inoremap / <c-r>=EqualSign('/')<CR>
-:inoremap > <c-r>=EqualSign('>')<CR>
-:inoremap < <c-r>=EqualSign('<')<CR>
-:inoremap >=  <c-r>=EqualSign('>=')<CR>
-:inoremap <=  <c-r>=EqualSign('<=')<CR>
-:inoremap &&  <c-r>=EqualSign('&&')<CR>
-:inoremap &  <c-r>=EqualSign('&')<CR>
-:inoremap \|\|  <c-r>=EqualSign("\|\|")<CR>
-:inoremap \|  <c-r>=EqualSign("\|")<CR>
+" :inoremap = <c-r>=EqualSign('=')<CR>
+" " :inoremap == <c-r>=EqualSign('==')<CR>
+" " :inoremap === <c-r>=EqualSign('===')<CR>
+" :inoremap . <c-r>=EqualSign('.')<CR>
+" :inoremap + <c-r>=EqualSign('+')<CR>
+" " :inoremap - <c-r>=EqualSign('-')<CR>
+" :inoremap * <c-r>=EqualSign('*')<CR>
+" :inoremap / <c-r>=EqualSign('/')<CR>
+" :inoremap > <c-r>=EqualSign('>')<CR>
+" :inoremap < <c-r>=EqualSign('<')<CR>
+" :inoremap >=  <c-r>=EqualSign('>=')<CR>
+" :inoremap <=  <c-r>=EqualSign('<=')<CR>
+" :inoremap &&  <c-r>=EqualSign('&&')<CR>
+" :inoremap &  <c-r>=EqualSign('&')<CR>
+" :inoremap \|\|  <c-r>=EqualSign("\|\|")<CR>
+" :inoremap \|  <c-r>=EqualSign("\|")<CR>
+" :inoremap \!=  <c-r>=EqualSign("\!=")<CR>
+"
 endif
 
 function! EqualSign(char)
@@ -1026,6 +1075,10 @@ function! EqualSign(char)
             return a:char."\<SPACE>\<ESC>a"
         endif 
     endif
+endfunction
+
+function! EqualSign2(char)
+    return "\<SPACE>".a:char."\<SPACE>\<ESC>a"
 endfunction
 
 " snipMate 设置全局变量
@@ -1064,4 +1117,16 @@ autocmd FileType php inoremap <C-p> <ESC>:call PhpDocSingle()<CR>i
 autocmd FileType php nnoremap <C-p> :call PhpDocSingle()<CR>
 autocmd FileType php vnoremap <C-p> :call PhpDocRange()<CR>
 
+colorscheme koehler2 "设置主题
+
+let g:go_highlight_types  =  1
+let g:go_highlight_fields  =  1
+let g:go_highlight_functions  =  1
+let g:go_highlight_function_calls  =  1
+let g:go_highlight_operators  =  1
+let g:go_highlight_extra_types  =  1
+
+
+" vim-go settings
+let g:go_fmt_command = "goimports"
 
