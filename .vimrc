@@ -397,9 +397,12 @@ Plug 'pangloss/vim-javascript'
 "
 "go
 Plug 'fatih/vim-go'
-" Plug 'volgar1x/vim-gocode'
+Plug 'volgar1x/vim-gocode'
+Plug 'dgryski/vim-godef'
+
 " Vim-go默认是用ultisnips引擎插件
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 
 "提升速度
@@ -587,10 +590,24 @@ function AutoUpdateTags()
     "c
     "!/usr/bin/ctags -f tags -R --languages=php --C-kinds=+p --fields=+iaS --extra=+q 
     "php
-    !/usr/bin/ctags -f tags -R --languages=php --PHP-kinds=+cidfv --fields=+iaS --extra=+q --exclude=$PWD/runtime
+
+    if &filetype == 'php' 
+        !/usr/bin/ctags -f tags -R --languages=php --PHP-kinds=+cidfv --fields=+iaS --extra=+q --exclude=$PWD/runtime
+    endif
+    " go
+    if &filetype == 'go' 
+        !/usr/bin/ctags -f tags -R --languages=go --Go-kinds=+fvt --fields=+iaS --extra=+q --exclude=$PWD/runtime
+    endif
 endfunction
 function AutoCreateCscopeFiles()
-    !find  $PWD -name '*.php'> cscope.files
+    if &filetype == 'php' 
+        !find  $PWD -name '*.php'> cscope.files
+    endif
+    if &filetype == 'go' 
+        go_pkg_src=${GOROOT}/src
+        !find  $PWD -name '*.go'> cscope.files
+        !find $go_pkg_src  -name '*.go' >> cscope.files 
+    endif
 endfunction
 function AutoUpdateCscopeOut()
     !cscope -Rbq -i cscope.files
@@ -703,7 +720,7 @@ let g:syntastic_always_populate_loc_list = 1
 "打开报错窗口
 let g:syntastic_auto_loc_list = 1 
 "打开文件时自动进行检查
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 "进行实时检查，如果觉得卡顿，将下面的选项置为1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_aggregate_errors = 1
@@ -837,7 +854,6 @@ nmap <C-i> :cs find i <C-R>=expand("<cfile>")<CR><CR>
 " 2或者d  —— 查找被这个函数调用的函数（们）
 "c-d 冲突了
 nmap <C-d> :cs find d <C-R>=expand("<cword>")<CR><CR>
-
 nmap <C-]> :cs find 1 <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
 map <C-T> <C-O>
@@ -1130,3 +1146,10 @@ let g:go_highlight_extra_types  =  1
 " vim-go settings
 let g:go_fmt_command = "goimports"
 
+" godef
+let g:godef_split=0 """左右打开新窗口的时候
+let g:godef_command="godef"
+let g:godef_same_file_in_same_window=1 """函数在同一个文件中时不需要打开新窗口
+
+
+let g:go_bin_path=$GOBIN
